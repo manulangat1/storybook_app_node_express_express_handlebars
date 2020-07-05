@@ -2,9 +2,11 @@ const express = require('express')
 const dotenv = require('dotenv')
 const exphbs =  require('express-handlebars')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 const passport = require('passport')
 const path = require('path')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 const connectDB = require('./config/db')
 //Load config 
 dotenv.config({path:'./config/config.env'})
@@ -26,7 +28,8 @@ app.use(
     session({
         secret:'jjdjjd',
         resave:false,
-        saveUninitialized:false
+        saveUninitialized:false,
+        store:new MongoStore({mongooseConnection:mongoose.connection})
     })
 )
 
