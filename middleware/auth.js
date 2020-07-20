@@ -7,6 +7,7 @@ module.exports = {
         }
     },
     ensureGuest:function(req,res,next){
+        console.log("Ypu are authenticated")
         if (req.isAuthenticated()){
             res.redirect('/dashboard')
         }
