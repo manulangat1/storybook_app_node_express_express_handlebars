@@ -15,6 +15,10 @@ connectDB()
 ///passport config 
 require('./config/passport')(passport)
 const app = express()
+app.use(express.urlencoded({
+    extended: false
+  }))
+app.use(express.json())
 //Logginf 
 if(process.env.NODE_ENV === 'developement'){
     app.use(morgan('dev'))
@@ -36,6 +40,7 @@ app.use(
 //passport iddleware
 app.use(passport.initialize())
 app.use(passport.session())
+// app.use(bodyParser.urlencoded({ extended: true }))
 // static folder
 app.use(express.static(path.join(__dirname,'public')))
 //Link to routes 
